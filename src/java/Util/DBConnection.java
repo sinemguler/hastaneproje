@@ -5,31 +5,34 @@
  */
 package Util;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Sinem
  */
 public class DBConnection {
-    public static Connection getConnection(){
-        Connection c = null;
-        try{
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/hastane?user=root&password=1905");
-            
-       } catch (Exception e) {
-            System.out.println(e.getMessage());
-    }
-        return c;
-}
+   public Connection connect(){
+    Connection c = null ;
+    try{
+    Class.forName("com.mysql.jdbc.Driver").newInstance();
+     c = DriverManager.getConnection("jdbc:mysql://localhost:3306/hastane?user=root&password=1905");
+    }catch(SQLException e){
+            System.out.println(e.getMessage()) ;
     
-   public static void close(Connection con) {
-		try {
-			con.close();
-		} catch (Exception ex) {
-		}
-	}
+    }   catch (ClassNotFoundException|InstantiationException|IllegalAccessException ex) {
+           
+        System.out.println(ex.getMessage())    ; 
+    } 
+    return c ;
+    
+    
+    }   
 }
+
+

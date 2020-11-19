@@ -25,8 +25,9 @@ public abstract class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
+        HttpServletRequest req = (HttpServletRequest) request; //Container a gelen her bir istek , servlet sınıfına HttpServletRequest sınıfı ile iletilir
+
+        HttpServletResponse res = (HttpServletResponse) response; //Container dışına verilecek olan response(cevap)  servlet tarafından HttpServletResponse ile verilir
 
         String url = req.getRequestURI();
 

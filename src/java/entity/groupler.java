@@ -14,7 +14,7 @@ public class groupler {
     private Long group_id;
     private String group_name;
 
-    public groupler(Long group_id, String group_name) {
+    public groupler(Long group_id, String group_name) { //CONSTRUCTOR
         this.group_id = group_id;
         this.group_name = group_name;
     }
@@ -22,7 +22,7 @@ public class groupler {
     public groupler() {
     }
 
-    public Long getGroup_id() {
+    public Long getGroup_id() { //GETTER SETTER
         return group_id;
     }
 
