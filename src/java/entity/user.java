@@ -16,9 +16,7 @@ public class user {
     private Long user_id;
     private String userName;
     private String password;
-    private String user_turu;
-
-    private List<groupler> groupler;
+   
 
     public Long getUser_id() {
         return user_id;
@@ -44,25 +42,10 @@ public class user {
         this.password = password;
     }
 
-    public String getUser_turu() {
-        return user_turu;
-    }
-
-    public void setUser_turu(String user_turu) {
-        this.user_turu = user_turu;
-    }
-
-    public List<groupler> getGroupler() {
-        return groupler;
-    }
-
-    public void setGroupler(List<groupler> groupler) {
-        this.groupler = groupler;
-    }
-
+   
     @Override
     public String toString() {
-        return "user{" + "user_id=" + user_id + ", userName=" + userName + ", password=" + password + ", user_turu=" + user_turu + '}';
+        return "user{" + "user_id=" + user_id + ", userName=" + userName + ", password=" + password +  '}';
     }
 
 }

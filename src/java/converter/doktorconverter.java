@@ -16,18 +16,18 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Sinem
  */
-@FacesConverter(value = "doktorconverter")
+@FacesConverter(value = "doktorconverter") //xhtml tarafında görünür olması için
 public class doktorconverter implements Converter {
 
     private doktorDAO doktorDAO;
 
     @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+    public Object getAsObject(FacesContext context, UIComponent component, String value) { //xhtml tarafından string olarak  gelen veriyi nesneye dönüştüren kod
         return this.getDoktorDAO().find(Long.valueOf(value));
     }
 
     @Override
-    public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
+    public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) { //nesneyi string return eder
         doktor d = (doktor) arg2;
         return d.getId_dok().toString();
     }

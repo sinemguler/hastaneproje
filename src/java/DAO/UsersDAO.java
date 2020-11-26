@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UsersDAO extends DBConnection {
+public class UsersDAO extends BaseDao {
 
     public static boolean validate(String user, String password, String a) { //doğrulamak
         Connection con = null;
@@ -25,7 +25,7 @@ public class UsersDAO extends DBConnection {
 
         try {
             con = DBConnection.getConnection();
-            ps = con.prepareStatement("Select uname,password,userTuru from users where uname = ? and password = ? and userTuru =? ");
+            ps = con.prepareStatement("Select uname,password from users where uname = ? and password = ? ");
             ps.setString(1, user);
             ps.setString(2, password);
             ps.setString(3, a);

@@ -96,13 +96,13 @@ public class hasta {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
+        if (this == obj) { //referansları eşitse aynı nesnedir
             return true;
         }
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass()) {  //sınıfları farklıysa eşit değildir
             return false;
         }
         final hasta other = (hasta) obj;
