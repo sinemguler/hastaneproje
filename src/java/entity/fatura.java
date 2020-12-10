@@ -16,7 +16,7 @@ public class fatura {
     private int id_fatura;
     private String fatura_tarihi;
     private int miktar;
-    private hasta h;//1
+    private hasta h;
 
     public fatura(int id_fatura, String fatura_tarihi, int miktar, hasta h) {
         this.id_fatura = id_fatura;

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package DAO;
+import Util.DBCon;
 import entity.user;
 import Util.DBConnection;
 
@@ -22,9 +23,9 @@ public class RegisterDao extends BaseDao {
     public static  void insert(String userName, String password) {
      //   DBConnection.connect();
          
-        DBConnection.getConnection();
+        DBCon.getConnection();
         try {
-             Statement sts = DBConnection.getConnection().createStatement();
+             Statement sts = DBCon.getConnection().createStatement();
             String sql = "INSERT INTO user(userName,password) VALUES('" + userName + "','" + password + "','" + 0+ "','" + 0 + "')";
             sts.executeUpdate(sql);
 

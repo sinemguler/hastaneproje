@@ -10,6 +10,7 @@ package DAO;
  * @author Sinem
  */
 
+import Util.DBCon;
 import Util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +25,7 @@ public class UsersDAO extends BaseDao {
         PreparedStatement ps = null;
 
         try {
-            con = DBConnection.getConnection();
+            con = DBCon.getConnection();
             ps = con.prepareStatement("Select uname,password from users where uname = ? and password = ? ");
             ps.setString(1, user);
             ps.setString(2, password);
@@ -40,7 +41,7 @@ public class UsersDAO extends BaseDao {
             System.out.println("Login error -->" + ex.getMessage());
             return false;
         } finally {
-            DBConnection.close(con);
+            DBCon.close(con);
         }
         return false;
     }
@@ -50,7 +51,7 @@ public class UsersDAO extends BaseDao {
         PreparedStatement ps = null;
 
         try {
-            con = DBConnection.getConnection();
+            con = DBCon.getConnection();
             ps = con.prepareStatement("Select uname,grup_name from islemler where uname =? and grup_name =? and " + lem + "=1");
 
             ps.setString(1, uname);
@@ -66,7 +67,7 @@ public class UsersDAO extends BaseDao {
             System.out.println("Login error -->" + ex.getMessage());
             return false;
         } finally {
-            DBConnection.close(con);
+            DBCon.close(con);
         }
         return false;
     }
@@ -76,7 +77,7 @@ public class UsersDAO extends BaseDao {
         PreparedStatement ps = null;
 
         try {
-            con = DBConnection.getConnection();
+            con = DBCon.getConnection();
             ps = con.prepareStatement("Select uname,password from Users where uname = ? and password = ?");
            
             ps.setString(1, user);
@@ -92,7 +93,7 @@ public class UsersDAO extends BaseDao {
             System.out.println("Login error -->" + ex.getMessage());
             return false;
         } finally {
-            DBConnection.close(con);
+            DBCon.close(con);
         }
         return false;
     }

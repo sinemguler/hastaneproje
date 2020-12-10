@@ -18,13 +18,13 @@ import java.util.logging.Logger;
  */
 public class DBConnection {
 
-    public static Connection getConnection() {
+   /* public static Connection getConnection() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public static void close(Connection con) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
    public Connection connect(){
     Connection c = null ;
     try{

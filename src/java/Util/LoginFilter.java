@@ -28,22 +28,22 @@ public class LoginFilter implements Filter {
     
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request; //süzgeç görevi görür
-        HttpServletResponse res = (HttpServletResponse) response;
+        HttpServletRequest req = (HttpServletRequest) request; //süzgeç görevi görür Container a gelen her bir istek , servlet sınıfına HttpServletRequest sınıfı ile iletilir
+        HttpServletResponse res = (HttpServletResponse) response;  //Container dışına verilecek olan response(cevap)  servlet tarafından HttpServletResponse ile verilir
         
-        String url = req.getRequestURI();
+        String url = req.getRequestURI(); //url alınır
         
         user u = (user) req.getSession().getAttribute("valid_user");
         
         if (u == null) { //kullanıcı yoksa
             
             if (url.contains("secret") || url.contains("logout")) { //kayıtlı olmayan kullanıcı şartı
-                res.sendRedirect(req.getContextPath()+"/login.xhtml");
+                res.sendRedirect(req.getContextPath()+"/login.xhtml"); //yönlendirme
             } else {
-                chain.doFilter(request, response);
+                chain.doFilter(request, response); //istediği sayfaya yönlendirir
             }
         } else { //varsa
-            if (url.contains("register") || url.contains("login")) {
+            if (url.contains("register") || url.contains("login")) {  //kayıtlı kullanıcı şartı
                  res.sendRedirect(req.getContextPath()+"/secret/secret.xhtml");
             } else if (url.contains("logout")) {
                 req.getSession().invalidate(); //session gecersiz
@@ -63,65 +63,3 @@ public class LoginFilter implements Filter {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*import entity.user;
-import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;*/
-
-/*@WebFilter("/") //filter olduğu belirtilir
-public abstract class LoginFilter implements Filter {
-
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request; //Container a gelen her bir istek , servlet sınıfına HttpServletRequest sınıfı ile iletilir
-
-        HttpServletResponse res = (HttpServletResponse) response; //Container dışına verilecek olan response(cevap)  servlet tarafından HttpServletResponse ile verilir
-
-        String url = req.getRequestURI();
-
-        user u = (user) req.getSession().getAttribute("valid_user");
-
-        if (u == null) { //kullanıcı yoksa
-
-            if (url.contains("secret") || url.contains("logout")) { //kayıtlı olmayan kullanıcı şartı
-                res.sendRedirect(req.getContextPath() + "/login.xhtml");
-            } else {
-                chain.doFilter(request, response);
-            }
-        } else { //varsa
-            if (url.contains("register") || url.contains("login")) { //kayıtlı kullanıcı şartı
-                res.sendRedirect(req.getContextPath() + "/secret/secret.xhtml");
-            } else if (url.contains("logout")) {
-                req.getSession().invalidate();
-                res.sendRedirect(req.getContextPath() + "/index.xhtml");
-            } else {
-                chain.doFilter(request, response);
-            }
-        }
-
-    }
-
-}*/
