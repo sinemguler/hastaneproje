@@ -5,16 +5,10 @@
  */
 package Util;
 
-/**
- *
- * @author Sinem
- */
-
-import entity.user;
+import entity.User;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -22,44 +16,39 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebFilter("/*")
+/**
+ *
+ * @author Sinem
+ */
+@WebFilter("/*") //filter olduğu belirtilir
 public class LoginFilter implements Filter {
-    
+
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request; //süzgeç görevi görür Container a gelen her bir istek , servlet sınıfına HttpServletRequest sınıfı ile iletilir
-        HttpServletResponse res = (HttpServletResponse) response;  //Container dışına verilecek olan response(cevap)  servlet tarafından HttpServletResponse ile verilir
-        
-        String url = req.getRequestURI(); //url alınır
-        
-        user u = (user) req.getSession().getAttribute("valid_user");
-        
+    public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) sr; //süzgeç görevi görür
+        HttpServletResponse res = (HttpServletResponse) sr1;
+
+        String url = req.getRequestURI();
+
+        User u = (User) req.getSession().getAttribute("valid_user");
+
         if (u == null) { //kullanıcı yoksa
-            
-            if (url.contains("secret") || url.contains("logout")) { //kayıtlı olmayan kullanıcı şartı
-                res.sendRedirect(req.getContextPath()+"/login.xhtml"); //yönlendirme
+
+            if (url.contains("secret") || url.contains("logout")) {    //kayıtlı olmayan kullanıcı şartı
+                res.sendRedirect(req.getContextPath() + "/login.xhtml");
             } else {
-                chain.doFilter(request, response); //istediği sayfaya yönlendirir
+                fc.doFilter(sr, sr1);
             }
+
         } else { //varsa
-            if (url.contains("register") || url.contains("login")) {  //kayıtlı kullanıcı şartı
-                 res.sendRedirect(req.getContextPath()+"/secret/secret.xhtml");
+            if (url.contains("register") || url.contains("login")) {   //kayıtlı kullanıcı şartı
+                res.sendRedirect(req.getContextPath() + "/secret/secret.xhtml");
             } else if (url.contains("logout")) {
-                req.getSession().invalidate(); //session gecersiz
-                 res.sendRedirect(req.getContextPath()+"/index.xhtml");
+                req.getSession().invalidate();
+                res.sendRedirect(req.getContextPath() + "/index.xhtml");
             } else {
-                chain.doFilter(request, response);
+                fc.doFilter(sr, sr1);
             }
         }
     }
-    
-    @Override
-    public void destroy() {
-    }
-    
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-    }
-    
 }
